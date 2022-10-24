@@ -11,7 +11,7 @@ let correctAnswer = "", correctScore = askedCount = 0, totalQuestion = 10;
 
 // load question from API
 async function loadQuestion(){
-    const APIUrl = 'http://teamsports.nighthawkcoding.ml/api/nfl/news';
+    const APIUrl = 'https://teamsports.nighthawkcoding.ml/api/nfl/news';
     const result = await fetch(`${APIUrl}`)
     const data = await result.json();
     _result.innerHTML = "";
