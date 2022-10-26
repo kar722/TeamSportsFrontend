@@ -9,14 +9,24 @@ const _totalQuestion = document.getElementById('total-question');
 
 let correctAnswer = "", correctScore = askedCount = 0, totalQuestion = 10;
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 // load question from API
 async function loadQuestion(){
     const APIUrl = 'https://teamsports.nighthawkcoding.ml/api/nfl/news';
     const result = await fetch(`${APIUrl}`)
     const data = await result.json();
+    shuffleArray(data.results);
     _result.innerHTML = "";
     showQuestion(data.results[0]);
 }
+
+
 
 // event listeners
 function eventListeners(){
