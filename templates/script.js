@@ -71,6 +71,7 @@ function selectOption(){
                 activeOption.classList.remove('selected');
             }
             option.classList.add('selected');
+            option.setAttribute("id","selected");
         });
     });
 }
@@ -81,6 +82,9 @@ function checkAnswer(){
     if(_options.querySelector('.selected')){
         let selectedAnswer = _options.querySelector('.selected span').textContent;
         if(selectedAnswer == HTMLDecode(correctAnswer)){
+            // console.log(document.getElementById("selected"))
+            // document.getElementById('selected').style.backgroundColor = "green"
+            // document.getElementById('selected').innerText = ".."
             correctScore++;
             _result.innerHTML = `<p><i class = "fas fa-check"></i>Correct Answer!</p>`;
         } else {
