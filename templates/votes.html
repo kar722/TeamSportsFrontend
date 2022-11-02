@@ -34,6 +34,8 @@ tr:nth-child(even) {
       <th>Game</th>
       <th>Team 1 Wins</th>
       <th>Team 2 Wins</th>
+      <th>Team 1 Win Percentage</th>
+      <th>Team 2 Win Percentage</th>
     </tr>
     </thead>
     <tbody id="result">
@@ -113,11 +115,18 @@ tr:nth-child(even) {
                 };
                 boohoo.appendChild(boohoo_but);  // add "boohoo button" to boohoo cell
                
+              const ratio1 = document.createElement("td");
+              ratio1.innerText = Math.round(parseInt(haha_but.innerHTML) /(parseInt(haha_but.innerHTML) + parseInt(boohoo_but.innerHTML)) * 100) + "%"
+
+              const ratio2 = document.createElement("td");
+              ratio2.innerText = Math.round(parseInt(boohoo_but.innerHTML) /(parseInt(haha_but.innerHTML) + parseInt(haha_but.innerHTML)) * 100) + "%"
+
               // this builds ALL td's (cells) into tr (row) element
               tr.appendChild(joke);
               tr.appendChild(haha);
               tr.appendChild(boohoo);
-  
+              tr.appendChild(ratio1);
+              tr.appendChild(ratio2)
               // this adds all the tr (row) work above to the HTML "result" container
               resultContainer.appendChild(tr);
             }
@@ -143,6 +152,8 @@ tr:nth-child(even) {
         // valid response will have JSON data
         response.json().then(data => {
             console.log(data);
+            document.getElementById(elemID).innerHTML = data.ratio1;
+            document.getElementById(elemID).innerHTML = data.ratio2;
             // Likes or Jeers updated/incremented
             if (type === HAHA) // like data element
               document.getElementById(elemID).innerHTML = data.haha;  // fetched haha data assigned to haha Document Object Model (DOM)
