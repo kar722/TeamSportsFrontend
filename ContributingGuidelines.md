@@ -10,7 +10,6 @@
 
 
 ## Overall Policy
-The overall contributing policy for this group will be to use pull requests. Merge Conflicts were one of the main issues encountered last trimester, and therefore the policy is crafted around a) avoiding merge conflicts and b) resolving merge conflicts in a convenient way that avoids members losing code.
 
 In order to achieve both these goals, pull requests will be used. Members will create branches off main whenever they are working on major features or making major changes to existing files. Any edits to index.html will require branches to be created. Within these branches, members will commit and push as usual, but will not affect the other contributors on the main branch. After the new feature or change is finished, contributors will create a pull request describing their changes, with specific information about important lines of code.
 
