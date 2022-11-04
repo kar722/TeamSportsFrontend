@@ -4,6 +4,13 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.header {
+    padding: 60px;
+    text-align: center;
+    font-size: 30px;
+  }
+
 :root{
     --light-purple-color: #0011fff3;
     --light-color: #fff;
