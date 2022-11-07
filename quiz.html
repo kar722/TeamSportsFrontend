@@ -29,6 +29,7 @@ $(function(){
         <div class = "quiz-container">
             <div class = "quiz-head">
                 <h1 class = "quiz-title">Quiz Game</h1>
+                <div id="google_translate_element"></div>
                 <div class = "quiz-score flex">
                     <span id = "correct-score"></span>/<span id = "total-question"></span>
                 </div>
@@ -50,5 +51,14 @@ $(function(){
 
 
     <script src = "script.js"></script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+        </script>
+        
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
