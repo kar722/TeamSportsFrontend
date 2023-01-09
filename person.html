@@ -1,0 +1,96 @@
+<label for="fname">Enter an id:</label>
+<input type="text" id="id" name="id"><br><br>
+
+<br><br>
+
+<input type="button" onClick="getAge()">Find Out what Age you Are</input>
+<br>
+<input type="button" onClick="getNationality()">Find Out what Nation you are From</input>
+<br>
+<input type="button" onClick="getPerson()">Find Out about registered people</input>
+<br>
+
+<label id="result"></label>
+
+<script>
+
+    var options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        };
+
+        function getPerson() {
+        var url = "https://teamsports.nighthawkcoding.ml/api/person/";
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            Document.getElementById("result").innerHTML = "Error: " + err;
+        })
+
+        }
+
+    function getAge() {
+        var url = "https://teamsports.nighthawkcoding.ml/getAge/" + document.getElementById("id").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            Document.getElementById("result").innerHTML = "Error: " + err;
+        })
+
+        }
+
+    function getNationality() {
+        var url = "https://teamsports.nighthawkcoding.ml/getNationality/" + document.getElementById("id").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            Document.getElementById("result").innerHTML = "Error: " + err;
+        })
+    }
+
+</script>

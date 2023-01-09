@@ -86,7 +86,7 @@ function checkAnswer(){
             // document.getElementById('selected').style.backgroundColor = "green"
             // document.getElementById('selected').innerText = ".."
             correctScore++;
-            _result.innerHTML = `<p><i class = "fas fa-check"></i>Correct Answer!</p>`;
+            _result.innerHTML = `<p><i class = "fas fa-check"></i>Your answer is correct!</p>`;
         } else {
             _result.innerHTML = `<p><i class = "fas fa-times"></i>Incorrect Answer!</p> <small><b>Correct Answer: </b>${correctAnswer}</small>`;
         }

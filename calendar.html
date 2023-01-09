@@ -1,0 +1,125 @@
+
+
+<label for="fname">Enter a Year:</label>
+<input type="text" id="firstyear" name="firstyear"><br><br>
+<label for="lname">Enter a Year:</label>
+<input type="text" id="secondyear" name="secondyear"><br><br>
+<label for="fname">Enter a Date (MM/DD/YYYY):</label>
+<input type="text" id="mm/dd/yyyy" name="mm/dd/yyyy"><br><br>
+<label for="lname">Enter 2 Years with a / in between (YYYY/YYYY):</label>
+<input type="text" id="yyyy/yyyy" name="yyyy/yyyy"><br><br>
+
+<br><br>
+
+<input type="button" onClick="isLeapYear()">Find Out if a Year is a Leap Year</input>
+<br>
+<input type="button" onClick="firstDayOfYear()">First Day of a Certain Year</input>
+<br>
+<input type="button" onClick="dayOfYear()">What Day of the Year it is</input>
+<br>
+<input type="button" onClick="numberOfLeapYears()">Number of Leap Years Between a Time Period</input>
+
+<label id="result"></label>
+
+<script>
+
+    var options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        };
+    
+    function isLeapYear() {
+        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/isLeapYear/" + document.getElementById("firstyear").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            document.getElementById("result").innerHTML = "Error: " + err;
+        })
+
+        }
+
+    function firstDayOfYear() {
+        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/firstDayOfYear/" + document.getElementById("secondyear").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            document.getElementById("result").innerHTML = "Error: " + err;
+        })
+    }
+
+    function dayOfYear() {
+        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/dayOfYear/" + document.getElementById("mm/dd/yyyy").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            document.getElementById("result").innerHTML = "Error: " + err;
+        })
+    }
+
+    function numberOfLeapYears() {
+        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/numberOfLeapYears/" + document.getElementById("yyyy/yyyy").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            document.getElementById("result").innerHTML = "Error: " + err;
+        })
+    }
+</script>
