@@ -1,125 +1,61 @@
+<input id="inputRow" placeholder="Input Number of Row">
+<input id="inputCol" placeholder="Input Number of Col">
+<button onclick="lightboard(getRow(), getCol())">Submit</button>
+<table>
+    <thead>
+      <tr>
+        <th>Row</th>
+        <th>Column</th>
+        <th>On</th>
+        <th>Red</th>
+        <th>Green</th>
+        <th>Blue</th>
+        <th>Effect</th>
+      </tr>
+    </thead>
+    <tbody id="lightboard">
+    </tbody>
+  </table>
 
-<label for="fname">Enter size L/W:</label>
-<input type="text" id="size" name="size"><br><br>
-<!-- <label for="lname">Enter a Year:</label>
-<input type="text" id="secondyear" name="secondyear"><br><br>
-<label for="fname">Enter a Date (MM/DD/YYYY):</label>
-<input type="text" id="month" name="month"><br><br>
-<label for="lname">Enter 2 Years with a / in between (YYYY/YYYY):</label>
-<input type="text" id="day" name="day"><br><br> -->
 
-<br><br>
-
-<input type="button" onClick="create()">Create a lightboard</input>
-<br>
-<!-- <input type="button" onClick="firstDayOfYear()">First Day of a Certain Year</input>
-<br>
-<input type="button" onClick="dayOfYear()">What Day of the Year it is</input>
-<br>
-<input type="button" onClick="numberOfLeapYears()">Number of Leap Years Between a Time Period</input> -->
-
-<label id="result"></label>
 
 <script>
 
-    var options = {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'no-cors', // no-cors, *cors, same-origin
-            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'omit', // include, *same-origin, omit
-            headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        };
+function lightboard(row, col) {
     
-    function create() {
-        var url = "https://teamsports.nighthawkcoding.ml/api/lights/create/" + document.getElementById("size").innerHTML;
+    result = document.getElementById("lightboard");
 
-        fetch(url, options).then(response => {
-            console.log('create')
-            console.log(response.json())
-            // response.json().then(data => {
-            //     var table = "<table>"
-            //     for (var key in data) {
-            //     if (data.hasOwnProperty(key)) {
-            //         table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-            //         }
-            //     }
-            // table += '</table>';
-            // document.body.innerHTML += table;
-            // })
-        })
+    fetch('https://teamsports.nighthawkcoding.ml/api/lights/create/' + row + "/" + col)
+        .then(function(response) {
+            response.json().then((data) => {
+              console.log(data);
+              if (data.length > 0) {
+                var temp = "";
+                data.forEach((itemData) => {
+                    temp += "<tr>";
+                    temp += "<td>" + itemData.row + "</td>";
+                    temp += "<td>" + itemData.column + "</td>";
+                    temp += "<td>" + itemData.light.on + "</td>";
+                    temp += "<td>" + itemData.light.red + "</td>";
+                    temp += "<td>" + itemData.light.green + "</td>";
+                    temp += "<td>" + itemData.light.blue + "</td>";
+                    temp += "<td>" + itemData.light.effect + "</td></tr>";
+                });
+                document.getElementById('lightboard').innerHTML = temp;
+                }
+            });
+          })
+}
 
-        .catch(err => {
-            document.getElementById("result").innerHTML = "Error: " + err;
-        })
 
-        }
 
-    // function firstDayOfYear() {
-    //     var url = "https://teamsports.nighthawkcoding.ml/api/lights/create/" + Document.getElementById("day").innerHTML;
+function getRow(){
+    let inputRow = document.getElementById("inputRow").value;
+    return inputRow;
+}
 
-    //     fetch(url, options).then(response => {
-
-    //         response.json().then(data => {
-    //             var table = "<table>"
-    //             for (var key in data) {
-    //             if (data.hasOwnProperty(key)) {
-    //                 table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-    //                 }
-    //             }
-    //         table += '</table>';
-    //         document.body.innerHTML += table;
-    //         })
-    //     })
-
-    //     .catch(err => {
-    //         Document.getElementById("result").innerHTML = "Error: " + err;
-    //     })
-    // }
-
-    // function dayOfYear() {
-    //     var url = "https://backend-csa.rohanj.dev/calendar1/leapYears/" + Document.getElementById("size").innerHTML + "/" + Document.getElementById("secondyear").innerHTML;
-
-    //     fetch(url, options).then(response => {
-
-    //         response.json().then(data => {
-    //             var table = "<table>"
-    //             for (var key in data) {
-    //             if (data.hasOwnProperty(key)) {
-    //                 table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-    //                 }
-    //             }
-    //         table += '</table>';
-    //         document.body.innerHTML += table;
-    //         })
-    //     })
-
-    //     .catch(err => {
-    //         Document.getElementById("result").innerHTML = "Error: " + err;
-    //     })
-    // }
-
-    // function numberOfLeapYears() {
-    //     var url = "https://backend-csa.rohanj.dev/calendar2/" + Document.getElementById("size").innerHTML;
-
-    //     fetch(url, options).then(response => {
-
-    //         response.json().then(data => {
-    //             var table = "<table>"
-    //             for (var key in data) {
-    //             if (data.hasOwnProperty(key)) {
-    //                 table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-    //                 }
-    //             }
-    //         table += '</table>';
-    //         document.body.innerHTML += table;
-    //         })
-    //     })
-
-    //     .catch(err => {
-    //         Document.getElementById("result").innerHTML = "Error: " + err;
-    //     })
-    // }
+function getCol(){
+    let inputCol = document.getElementById("inputCol").value;
+    return inputCol;
+}
 </script>
