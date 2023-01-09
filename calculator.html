@@ -1,0 +1,51 @@
+
+
+<label for="fname">Enter the First Number:</label>
+<input type="text" id="num1" name="num1"><br><br>
+<label for="lname">Enter the Operator:</label>
+<input type="text" id="operator" name="operator"><br><br>
+<label for="fname">Enter the Second Number:</label>
+<input type="text" id="num2" name="num2"><br><br>
+
+<br><br>
+
+<input type="button" onClick="calculator()">Calculate!</input>
+
+<label id="result"></label>
+
+<script>
+
+    var options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        };
+    
+    function calculator() {
+        var url = "https://teamsports.nighthawkcoding.ml/api/calculator/" + document.getElementById("num1").innerHTML + document.getElementById("operator").innerHTML + document.getElementById("num2").innerHTML;
+
+        fetch(url, options).then(response => {
+
+            response.json().then(data => {
+                var table = "<table>"
+                for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
+                    }
+                }
+            table += '</table>';
+            document.body.innerHTML += table;
+            })
+        })
+
+        .catch(err => {
+            Document.getElementById("result").innerHTML = "Error: " + err;
+        })
+
+        }
+</script>
