@@ -1,125 +1,86 @@
-
-
-<label for="fname">Enter a Year:</label>
-<input type="text" id="firstyear" name="firstyear"><br><br>
-<label for="lname">Enter a Year:</label>
-<input type="text" id="secondyear" name="secondyear"><br><br>
-<label for="fname">Enter a Date (MM/DD/YYYY):</label>
-<input type="text" id="mm/dd/yyyy" name="mm/dd/yyyy"><br><br>
-<label for="lname">Enter 2 Years with a / in between (YYYY/YYYY):</label>
-<input type="text" id="yyyy/yyyy" name="yyyy/yyyy"><br><br>
-
-<br><br>
-
-<input type="button" onClick="isLeapYear()">Find Out if a Year is a Leap Year</input>
-<br>
-<input type="button" onClick="firstDayOfYear()">First Day of a Certain Year</input>
-<br>
-<input type="button" onClick="dayOfYear()">What Day of the Year it is</input>
-<br>
-<input type="button" onClick="numberOfLeapYears()">Number of Leap Years Between a Time Period</input>
-
-<label id="result"></label>
-
+<p id="test"></p>
 <script>
+function numberOfLeapYears(year1, year2) {
+    result = document.getElementById("numberOfLeapYearsResult");
+    // Fetch data from API
+    fetch('https://teamsports.nighthawkcoding.ml/api/calendar/numberOfLeapYears/' + year1 + "/" + year2)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        result.innerHTML = "Leap Years between " + year1 + "and " + year2 + ": " + data.numberOfLeapYears;
+    })
+}
+function getYear1(){
+    let inputYear1 = document.getElementById("inputYear1").value;
+    return inputYear1;
+}
+function getYear2(){
+    let inputYear2 = document.getElementById("inputYear2").value;
+    return inputYear2;
+}
 
-    var options = {
-            method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            mode: 'no-cors', // no-cors, *cors, same-origin
-            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'omit', // include, *same-origin, omit
-            headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-        };
-    
-    function isLeapYear() {
-        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/isLeapYear/" + document.getElementById("firstyear").innerHTML;
+function getYear3(){
+    let inputYear3 = document.getElementById("inputYear3").value;
+    return inputYear3;
+}
 
-        fetch(url, options).then(response => {
+function getYear4(){
+    let inputYear4 = document.getElementById("inputYear4").value;
+    return inputYear4;
+}
 
-            response.json().then(data => {
-                var table = "<table>"
-                for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-                    }
-                }
-            table += '</table>';
-            document.body.innerHTML += table;
-            })
-        })
-
-        .catch(err => {
-            document.getElementById("result").innerHTML = "Error: " + err;
-        })
-
-        }
-
-    function firstDayOfYear() {
-        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/firstDayOfYear/" + document.getElementById("secondyear").innerHTML;
-
-        fetch(url, options).then(response => {
-
-            response.json().then(data => {
-                var table = "<table>"
-                for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-                    }
-                }
-            table += '</table>';
-            document.body.innerHTML += table;
-            })
-        })
-
-        .catch(err => {
-            document.getElementById("result").innerHTML = "Error: " + err;
-        })
-    }
-
-    function dayOfYear() {
-        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/dayOfYear/" + document.getElementById("mm/dd/yyyy").innerHTML;
-
-        fetch(url, options).then(response => {
-
-            response.json().then(data => {
-                var table = "<table>"
-                for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-                    }
-                }
-            table += '</table>';
-            document.body.innerHTML += table;
-            })
-        })
-
-        .catch(err => {
-            document.getElementById("result").innerHTML = "Error: " + err;
-        })
-    }
-
-    function numberOfLeapYears() {
-        var url = "https://teamsports.nighthawkcoding.ml/api/calendar/numberOfLeapYears/" + document.getElementById("yyyy/yyyy").innerHTML;
-
-        fetch(url, options).then(response => {
-
-            response.json().then(data => {
-                var table = "<table>"
-                for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    table += '<tr><td>' + key + '</td><td>' + data[key] + '</td></tr>';
-                    }
-                }
-            table += '</table>';
-            document.body.innerHTML += table;
-            })
-        })
-
-        .catch(err => {
-            document.getElementById("result").innerHTML = "Error: " + err;
-        })
-    }
+function getYear(){
+    let inputYear = document.getElementById("inputYear").value;
+    return inputYear;
+}
+function isLeapYear(yearparam) {
+    result = document.getElementById("isLeapYearResult");
+    // Fetch data from API
+    fetch('https://teamsports.nighthawkcoding.ml/api/calendar/isLeapYear/' + yearparam)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        result.innerHTML = "Is " + yearparam + " a leap year: " + data.isLeapYear;
+    })
+}
+function firstDayOfYear(yearparam1) {
+    result = document.getElementById("firstDayOfYearResult");
+    // Fetch data from API
+    fetch('https://teamsports.nighthawkcoding.ml/api/calendar/firstDayOfYear/' + yearparam1)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        result.innerHTML = "First Day of " + yearparam1 + " is: " + data.firstDayOfYear;
+    })
+}
+function dayOfYear(yearparam2) {
+    result = document.getElementById("dayOfYearResult");
+    // Fetch data from API
+    fetch('https://teamsports.nighthawkcoding.ml/api/calendar/dayOfYear/' + yearparam2)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        result.innerHTML = yearparam2 + " was " + "the: " + data.dayOfYear + " day of that year";
+    })
+}
 </script>
+Find Out if a Year is a Leap Year
+<input id="inputYear" placeholder="Input a Year">
+<button onclick="isLeapYear(getYear())">Submit</button>
+<p id="isLeapYearResult"></p>
+
+Check the Number of Leap Years in an Interval
+<input id="inputYear1" placeholder="Input Starting Year">
+    <input id="inputYear2" placeholder="Input Ending Year">
+    <button onclick="numberOfLeapYears(getYear1(), getYear2())">Submit</button>
+<p id="numberOfLeapYearsResult"></p>
+
+First Day of a Certain Year
+<input id="inputYear3" placeholder="Input a Year">
+    <button onclick="firstDayOfYear(getYear3())">Submit</button>
+<p id="firstDayOfYearResult"></p>
+
+What Day of the Year it is (Enter a Date (MM/DD/YYYY):)
+<input id="inputYear4" placeholder="Input a Year">
+    <button onclick="dayOfYear(getYear4())">Submit</button>
+<p id="dayOfYearResult"></p>
