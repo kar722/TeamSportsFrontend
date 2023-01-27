@@ -18,6 +18,33 @@
 
 
 <script>
+ 
+ var options = {
+            method: 'GET', // *GET, POST, PUT, DELETE, etc.
+            mode: 'no-cors', // no-cors, *cors, same-origin
+            cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'omit', // include, *same-origin, omit
+            headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded', 
+            },
+        };
+    
+        function send(){
+    var myVar = {"id" : 1};
+    console.log("peopleData", document.getElementById('id').value);
+    fetch("http://localhost:3000", {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(myVar)
+    }).then(function(response) {
+        return response.text();
+    }).then(function(muutuja){
+        document.getElementById('väljund').innerHTML = muutuja;
+    });
+}
 
     function getPeople() {
 
