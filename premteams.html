@@ -1,0 +1,42 @@
+<div id="teams-table"></div>
+
+<style>
+    table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #4c72af;
+  color: white;
+}
+</style>
+
+<script>
+fetch("https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League")
+  .then(response => response.json())
+  .then(data => {
+    let teams = data.teams;
+    let table = `<table>
+                  <tr>
+                    <th>Team</th>
+                    <th>Stadium</th>
+                    <th>Description</th>
+                    <th class= "picture">Stadium Pic</th>
+                  </tr>`;
+    teams.forEach(team => {
+      table += `<tr>
+                  <td>${team.strTeam}</td>
+                  <td>${team.strStadium}</td>
+                  <td>${team.strDescriptionEN}</td>
+                  <td>${team.strStadiumThumb}</td>
+                </tr>`;
+    });
+    table += `</table>`;
+    document.getElementById("teams-table").innerHTML = table;
+  });
+</script>
