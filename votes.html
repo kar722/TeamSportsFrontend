@@ -2,7 +2,15 @@
 
 <head>
   <style>
-    
+  #main-title {
+    text-align: center;
+  }
+
+  #main-table {
+    width: 70%;
+    margin: 0 auto;
+  }
+
   table, th, td {
     border: 2px solid black;
     border-collapse: collapse;
@@ -16,7 +24,7 @@
     color: black
   }
   tr:nth-child(even) {
-    background-color: rgb(128, 126, 26);
+    background-color: rgba(128, 126, 26,0.7);
     color: white;
   }
   
@@ -39,11 +47,11 @@
   <!--end of Navigation bar-->
   
   <body>
-    <h1>Upcoming UEFA Champions League Game Predictions</h1>
+    <h1 id="main-title">Upcoming NCAA Soccer Predictions</h1>
   
   
   
-  <table>
+  <table id="main-table">
       <thead>
       <tr>
         <th>Game</th>
