@@ -1,0 +1,43 @@
+.title {
+    text-align: center;
+}
+
+.clues {
+    display: flex;
+    margin: 0 auto;
+    width: 70%;
+    justify-content: space-between;
+}
+
+.guess {
+    text-align: center;
+    label {
+        font-size: 20px;
+    }
+}
+
+#user-guess {
+    padding: 2em;
+    background-color: rgb(34, 206, 178);
+    color: rgb(83, 114, 114);
+    border: none;
+    outline: none;
+    width: 30%;
+    margin: 1em;
+}
+
+#check {
+    padding: 1em;
+    width: 30%;
+    background-color:rgb(34, 206, 178);
+    color: rgb(83, 114, 114);
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+}
+
+#check:hover {
+    background-color:rgb(83, 114, 114);
+    transition: 0.5s;
+    color:rgb(34, 206, 178)
+}
