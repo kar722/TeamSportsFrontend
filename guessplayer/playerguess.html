@@ -9,16 +9,18 @@
 </head>
 <body>
     <h1 class="title">Guess the Player</h1>
-    <p id="position"></p>
     <div class="clues">
         <div class="clue" id="club">
             <h3>Club</h3>
+            <p id="playerclub"></p>
         </div>
         <div class="clue" id="nation">
             <h3>Nation</h3>
+            <p id="playernation"></p>
         </div>
         <div class="clue" id="position">
             <h3>Position</h3>
+            <p id="playerposition"></p>
         </div>
     </div>
     <div class="guess">
@@ -36,10 +38,31 @@
                 console.log(data)
                 var nation = (data["player"]["nation"])
                 var club = (data["player"]["club"])
+                fetch('https://futdb.app/api/clubs/'+ club ,{
+                    headers: {
+                        'X-AUTH-TOKEN': 'cd8f91b2-6593-4c72-9f04-656e722719ea'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data =>{
+                        club = (data['club']['name'])
+                        document.getElementById("playerclub").innerHTML= club
+                    })
+
+                fetch('https://futdb.app/api/nations/'+ nation ,{
+                    headers: {
+                        'X-AUTH-TOKEN': 'cd8f91b2-6593-4c72-9f04-656e722719ea'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data =>{
+                        nation = (data['nation']['name'])
+                        document.getElementById("playernation").innerHTML= nation
+                    })
                 var pos = (data["player"]["position"])
                 var answers = [data['player']['name']]
                 console.log(answers)
-                document.getElementById('position').innerHTML = pos;
+                document.getElementById('playerposition').innerHTML = pos;
                 var attempts = 5;
                 document.getElementById("check").addEventListener("click",function() {
                     answer = document.getElementById('user-guess').value;
