@@ -60,13 +60,13 @@
                         document.getElementById("playernation").innerHTML= nation
                     })
                 var pos = (data["player"]["position"])
-                var answers = [data['player']['name']]
+                var answers = [data['player']['name'].toLowerCase(), data['player']['commonName'].toLowerCase,data['player']['lastName'].toLowerCase()]
                 console.log(answers)
                 document.getElementById('playerposition').innerHTML = pos;
                 var attempts = 5;
                 document.getElementById("check").addEventListener("click",function() {
                     answer = document.getElementById('user-guess').value;
-                    if (answers.includes(answer)) {
+                    if (answers.includes(answer.toLowerCase())) {
                         document.getElementById('result').innerHTML = "CORRECT!"
                     } else {
                         attempts = attempts-1;
