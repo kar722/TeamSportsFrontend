@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 class="title">Guess the Player</h1>
+    <p id="position"></p>
+    <div class="clues">
+        <div class="clue" id="club">
+            <h3>Club</h3>
+        </div>
+        <div class="clue" id="nation">
+            <h3>Nation</h3>
+        </div>
+        <div class="clue" id="position">
+            <h3>Position</h3>
+        </div>
+    </div>
+    <div class="guess">
+        <label for="user-guess">Answer:</label>
+        <br>
+        <input type="text" id="user-guess" name="user-guess">
+        <br>
+        <button id="check">click</button>
+    </div>
+    <p id="result"></p>
+     <script>
+        fetch('https://teamsports.nighthawkcoding.ml/api/nfl/guess')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                var nation = (data["player"]["nation"])
+                var club = (data["player"]["club"])
+                var pos = (data["player"]["position"])
+                var answers = [data['player']['name']]
+                console.log(answers)
+                document.getElementById('position').innerHTML = pos;
+                var attempts = 5;
+                document.getElementById("check").addEventListener("click",function() {
+                    answer = document.getElementById('user-guess').value;
+                    if (answers.includes(answer)) {
+                        document.getElementById('result').innerHTML = "CORRECT!"
+                    } else {
+                        attempts = attempts-1;
+                        if (attempts <= 0) {
+                            document.getElementById('result').innerHTML = "Wrong, you've lost."
+                        }else {
+                        document.getElementById('result').innerHTML = "Wrong, you have " + String(attempts) + " left."
+                        }
+                    }
+                })
+
+
+            })
+    </script> 
+
+
+</body>
+</html>
