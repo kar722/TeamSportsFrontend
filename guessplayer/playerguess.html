@@ -71,7 +71,7 @@
                     } else {
                         attempts = attempts-1;
                         if (attempts <= 0) {
-                            document.getElementById('result').innerHTML = "Wrong, you've lost."
+                            document.getElementById('result').innerHTML = "Wrong, you've lost. The correct answer was " + data['player']['commonName'];
                         }else {
                         document.getElementById('result').innerHTML = "Wrong, you have " + String(attempts) + " left."
                         }
