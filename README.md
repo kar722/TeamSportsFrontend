@@ -11,5 +11,6 @@ Backend
 Frontend
 - [Frontend Repo](https://github.com/kar722/TeamSportsFrontend)
 - [Index.html](https://kar722.github.io/TeamSportsFrontend/)
-- [Quiz.html](https://kar722.github.io/templates/quiz.html)
-- [Votes.html](https://kar722.github.io/templates/votes.html)
+- [Quiz.html](http://teamsports.cf/quiz.html)
+- [Votes.html](http://teamsports.cf/votes.html)
+- [wccountdown.html](http://teamsports.cf/wccountdown.html)
