@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 class="title">Guess the Player</h1>
+    <div class="clues">
+        <div class="clue" id="club">
+            <h3>Club</h3>
+            <p id="playerclub"></p>
+        </div>
+        <div class="clue" id="nation">
+            <h3>Nation</h3>
+            <p id="playernation"></p>
+        </div>
+        <div class="clue" id="position">
+            <h3>Position</h3>
+            <p id="playerposition"></p>
+        </div>
+    </div>
+    <div class="guess">
+        <label for="user-guess">Answer:</label>
+        <br>
+        <input type="text" id="user-guess" name="user-guess">
+        <br>
+        <button id="check">click</button>
+    </div>
+    <p id="result"></p>
+     <script>
+        fetch('https://teamsports.nighthawkcoding.ml/api/nfl/guess')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                var nation = (data["player"]["nation"])
+                var club = (data["player"]["club"])
+                fetch('https://futdb.app/api/clubs/'+ club ,{
+                    headers: {
+                        'X-AUTH-TOKEN': 'cd8f91b2-6593-4c72-9f04-656e722719ea'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data =>{
+                        club = (data['club']['name'])
+                        document.getElementById("playerclub").innerHTML= club
+                    })
+
+                fetch('https://futdb.app/api/nations/'+ nation ,{
+                    headers: {
+                        'X-AUTH-TOKEN': 'cd8f91b2-6593-4c72-9f04-656e722719ea'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data =>{
+                        nation = (data['nation']['name'])
+                        document.getElementById("playernation").innerHTML= nation
+                    })
+                var pos = (data["player"]["position"])
+                var answers = [data['player']['name'].toLowerCase(), data['player']['commonName'].toLowerCase,data['player']['lastName'].toLowerCase()]
+                console.log(answers)
+                document.getElementById('playerposition').innerHTML = pos;
+                var attempts = 5;
+                document.getElementById("check").addEventListener("click",function() {
+                    answer = document.getElementById('user-guess').value;
+                    if (answers.includes(answer.toLowerCase())) {
+                        document.getElementById('result').innerHTML = "CORRECT!"
+                    } else {
+                        attempts = attempts-1;
+                        if (attempts <= 0) {
+                            document.getElementById('result').innerHTML = "Wrong, you've lost. The correct answer was " + data['player']['commonName'];
+                        }else {
+                        document.getElementById('result').innerHTML = "Wrong, you have " + String(attempts) + " left."
+                        }
+                    }
+                })
+
+
+            })
+    </script> 
+
+
+</body>
+</html>
