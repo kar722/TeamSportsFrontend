@@ -1,0 +1,74 @@
+<style>
+    #clue {
+  font-size: 20px;
+}
+
+input {
+  font-size: 18px;
+}
+
+button {
+  font-size: 18px;
+}
+
+</style>
+
+<div id="clue"></div>
+<input type="text" id="guess-input">
+<button id="guess-button">Guess</button>
+<button id="show-answer" style="display:none">Show Answer</button>
+<button id="next-question">Next Question</button>
+
+
+
+<script>
+let attempts = 0;
+let clues = ["This team is based in ", "This team's coach is ", "This team's primary color is", "This team was founded in", "This team's stadium is called "];
+let team;
+
+// Get the data from the API
+fetch("https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League") 
+  .then(response => response.json())
+  .then(data => {
+    team = data.teams[Math.floor(Math.random() * data.teams.length)];
+    //Randomize the clues
+    clues.sort(() => Math.random() - 0.5);
+    document.getElementById("clue").innerHTML = "Clue " + (attempts + 1) + ": " + clues[attempts] + team[clues[attempts].split(' ')[3].toLowerCase()];
+  
+    // Add an event listener for the guess button
+    document.getElementById("guess-button").addEventListener("click", () => {
+      attempts++;
+      // Get the guess from the input field
+      const guess = document.getElementById("guess-input").value;
+  
+      // Check if the guess is correct
+      if (guess.toLowerCase() === team.strTeam.toLowerCase()) {
+        alert("Correct! The team was " + team.strTeam);
+      } else {
+        if (attempts === 5) {
+          document.getElementById("show-answer").style.display = "block";
+          document.getElementById("guess-button").style.display = "none";
+        } else {
+          document.getElementById("clue").innerHTML = "Clue " + (attempts + 1) + ": " + clues[attempts] + team[clues[attempts].split(' ')[3].toLowerCase()];
+          alert("Incorrect. Please try again.");
+        }
+      }
+    });
+
+    // Add an event listener for the show-answer button
+    document.getElementById("show-answer").addEventListener("click", () => {
+      alert("The team was " + team.strTeam);
+    });
+
+    // Add an event listener for the next-question button
+    document.getElementById("next-question").addEventListener("click", () => {
+        team = data.teams[Math.floor(Math.random() * data.teams.length)];
+        clues.sort(() => Math.random() - 0.5);
+        document.getElementById("clue").innerHTML = "Clue " + (attempts + 1) + ": " + clues[0] + team[clues[0].split(' ')[3].toLowerCase()];
+        document.getElementById("guess-input").value = "";
+        attempts = 0;
+        document.getElementById("show-answer").style.display = "none";
+        document.getElementById("guess-button").style.display = "block";
+    });
+  });
+</script>
