@@ -28,9 +28,10 @@
         <br>
         <input type="text" id="user-guess" name="user-guess">
         <br>
-        <button id="check">click</button>
+        <button id="check" class="button">click</button>
+        <p id="result"></p>
+        <a class="button" href="./playerguess.html">next</a>
     </div>
-    <p id="result"></p>
      <script>
         fetch('https://teamsports.nighthawkcoding.ml/api/nfl/guess')
             .then(response => response.json())
@@ -66,7 +67,9 @@
                 var attempts = 5;
                 document.getElementById("check").addEventListener("click",function() {
                     answer = document.getElementById('user-guess').value;
-                    if (answers.includes(answer.toLowerCase())) {
+                    if (attempts <= 0){
+                        document.getElementById('result').innerHTML = "Wrong, you've lost. The correct answer was " + data['player']['commonName'];
+                    } else if (answers.includes(answer.toLowerCase())) {
                         document.getElementById('result').innerHTML = "CORRECT!"
                     } else {
                         attempts = attempts-1;
