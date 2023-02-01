@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Guess the Football Team</title>
+  </head>
+  <body>
+    <h1>Guess the Football Team</h1>
+    <form>
+      <input type="text" id="guess" />
+      <button type="submit">Guess</button>
+    </form>
+    <p id="result"></p>
+    <p class="clue"></p>
+    <p class="clue"></p>
+    <p class="clue"></p>
+    <p class="clue"></p>
+    <button onClick="refreshPage()">Next Question</button>
+    <button id="show-answer-button" style="display: none;">Show Answer</button>
+  </body>
+</html>
+
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+input[type="text"] {
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+button[type="submit"] {
+  background-color: lightblue;
+  color: rgb(0, 0, 0);
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[id="nextQuestion"] {
+  background-color: green;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button[id="showAnswer"] {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+</style>
+
+<script>
+const form = document.querySelector("form");
+const clues = document.querySelectorAll(".clue");
+const result = document.querySelector("#result");
+const apiUrl = "https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League";
+const nextQuestion = document.querySelector("#next-question");
+const showAnswerButton = document.querySelector("#show-answer-button");
+
+let teams = [];
+let currentTeam = {};
+let cluesGiven = 0;
+let attempts = 0;
+
+fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    teams = data.teams;
+    setCurrentTeam();
+  });
+
+function setCurrentTeam() {
+  currentTeam = teams[Math.floor(Math.random() * teams.length)];
+  clues[0].innerHTML = `Where the stadium of the team is based in: ${currentTeam.strStadiumLocation}`;
+  cluesGiven = 1;
+  attempts = 0;
+  showAnswerButton.style.display = "none";
+}
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  const guess = document.querySelector("#guess").value;
+  if (
+    guess.toLowerCase() === currentTeam.strTeam.toLowerCase() ||
+    guess.toLowerCase() === currentTeam.strTeamShort.toLowerCase() ||
+    guess.toLowerCase() === currentTeam.strAlternate.toLowerCase()
+  ) {
+    result.innerHTML = "Correct! The team is " + currentTeam.strTeam;
+  } else {
+    attempts++;
+    if (attempts >= 5) {
+      showAnswerButton.style.display = "inline-block";
+      return;
+    }
+    if (cluesGiven < 4) {
+      clues[cluesGiven].innerHTML = `${
+        cluesGiven === 1
+          ? "What the stadium name of the team is: " + currentTeam.strStadium
+          : cluesGiven === 2
+          ? "What the team's nickname is: " + currentTeam.strKeywords
+          : "What the team's 2 jersey colors are: " +
+            currentTeam.strKitColour1 +
+            " and " +
+            currentTeam.strKitColour2
+      }`;
+      cluesGiven++;
+    }
+    result.innerHTML = "Incorrect. Please try again.";
+  }
+});
+
+function refreshPage(){
+    window.location.reload();
+} 
+
+// nextQuestion.addEventListener("click", () => {
+//   setCurrentTeam();
+//   form.reset();
+//   result.innerHTML = "";
+//   for (let i = 0; i < clues.length; i++) {
+//     clues[i].innerHTML = "";
+//   }
+// });
+
+showAnswerButton.addEventListener("click", () => {
+  result.innerHTML = "The team is " + currentTeam.strTeam;
+});
+
+
+</script>
