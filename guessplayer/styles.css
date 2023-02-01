@@ -26,7 +26,7 @@
   margin: 1em;
 }
 
-#check {
+.button {
   padding: 1em;
   width: 30%;
   background-color: rgb(34, 206, 178);
@@ -34,9 +34,12 @@
   font-weight: bold;
   border: none;
   border-radius: 25px;
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
 }
 
-#check:hover {
+.button:hover {
   background-color: rgb(83, 114, 114);
   transition: 0.5s;
   color: rgb(34, 206, 178);
