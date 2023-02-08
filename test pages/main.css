@@ -27,20 +27,8 @@ body{
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
     color: var(--dark-color);
-    background: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D6tHC5MVNwog&psig=AOvVaw37b_ueNMwpW6yPF4N_G2fI&ust=1673030945422000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCJiR0YuMsfwCFQAAAAAdAAAAABAI');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 }
-.wrapper{
-    background: var(--light-color);
-    padding: 1.5rem 4rem 3rem 4rem;
-    width: 600px;
-    height: 680px;
-    border-top-left-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-    position: relative;
-    box-shadow: 0 4px 6px rgb(0 0 0 / 10%), 0 1px 3px rgb(0 0 0 / 10%);
-}
+
 .quiz-title{
     text-align: center;
     font-size: 2rem;
@@ -148,24 +136,4 @@ body{
     margin-bottom: .5rem;
     background-color: var(--light-purple-color);
     color: var(--light-color);
-}
-
-
-
-
-@media(max-width: 678px){
-    .quiz-title{
-        font-size: 1.6rem;
-    }
-    .wrapper{
-        margin: 3rem 0;
-        width: 90%;
-        height: 90%;
-        padding: 1.5rem 1rem 3rem 1rem;
-        border-top-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-    .quiz-foot button{
-        font-size: 1rem;
-    }
 }
