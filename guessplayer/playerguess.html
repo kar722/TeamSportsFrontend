@@ -33,7 +33,8 @@
         <a class="button" href="./playerguess.html">next</a>
     </div>
      <script>
-        fetch('https://teamsports.nighthawkcoding.ml/api/nfl/guess')
+
+        fetch('https://teamsports.nighthawkcoding.ml/api/quiz/guess')
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -67,10 +68,15 @@
                 var attempts = 5;
                 document.getElementById("check").addEventListener("click",function() {
                     answer = document.getElementById('user-guess').value;
-                    if (attempts <= 0){
-                        document.getElementById('result').innerHTML = "Wrong, you've lost. The correct answer was " + data['player']['commonName'];
-                    } else if (answers.includes(answer.toLowerCase())) {
+                    if (answers.includes(answer.toLowerCase())) {
                         document.getElementById('result').innerHTML = "CORRECT!"
+                        fetch('https://teamsports.nighthawkcoding.ml/api/quiz/add/mainuser/'+attempts+'/'+data['player']['name'],{
+                            method: "POST"
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                            })
                     } else {
                         attempts = attempts-1;
                         if (attempts <= 0) {
@@ -85,6 +91,17 @@
             })
     </script> 
 
-
 </body>
+<!--Navigation bar-->
+<div id="nav-placeholder">
+
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+  $(function(){
+    $("#nav-placeholder").load("navbar.html");
+  });
+</script>
+<!--end of Navigation bar-->
 </html>

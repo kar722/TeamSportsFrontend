@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Guess the Football Team</title>
+    <link rel="stylesheet" href="hometheme.css">
   </head>
+
+<!--Navigation bar-->
+<div id="nav-placeholder">
+
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+  $(function(){
+    $("#nav-placeholder").load("navbar.html");
+  });
+</script>
+<!--end of Navigation bar-->
   <body>
     <h1>Guess the Football Team</h1>
     <form>
@@ -68,7 +82,7 @@ button[id="showAnswer"] {
 const form = document.querySelector("form");
 const clues = document.querySelectorAll(".clue");
 const result = document.querySelector("#result");
-const apiUrl = "https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League";
+const apiUrl = "https://teamsports.nighthawkcoding.ml/api/epl/news";
 const nextQuestion = document.querySelector("#next-question");
 const showAnswerButton = document.querySelector("#show-answer-button");
 
