@@ -1,0 +1,71 @@
+<div id="nav-placeholder">
+
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("navbar.html");
+});
+</script>
+
+<head>
+    <link rel="stylesheet" href="headertheme.css">
+    <style>
+    #main-title {
+      text-align: center;
+    }
+  
+    #main-table {
+      width: 50%;
+      margin: 0 auto;
+    }
+  
+    table, th, td {
+      border: 2px solid rgb(16, 80, 42);
+      border-collapse: collapse;
+    }
+    
+    td,th {
+      padding: 1em;
+      
+    }
+    tr {
+      color: rgb(6, 55, 41)
+    }
+    tr:nth-child(even) {
+      background-color: rgba(128, 126, 26,0.7);
+      color: rgb(14, 66, 35);
+    }
+    
+    
+    </style>
+    
+    </head>
+<body>
+    <table id="main-table">
+    <thead>
+    <tr>
+      <th>Group</th>
+      <th>Country</th>
+      <th>Ranking</th>
+    </tr>
+    </thead>
+    <tbody id="result">
+      <!-- javascript generated data -->
+    </tbody>
+  </table>
+</body>
+<script>
+
+    fetch('https://teamsports.nighthawkcoding.ml/api/nfl/women')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            var nation = (data["player"]["nation"])
+            var club = (data["player"]["club"])
+        })
+</script>
+
+</script><script>var C={XX:{c:[0,0],n:"TBD",n2:"TBD"},IR:{c:[6,6],n:"Iran",n2:"Iran"},JP:{c:[6,6],n:"Japan",n2:"Japan"},KR:{c:[6,6],n:"Korea Republic",n2:"Korea Rep."},AU:{c:[6,6],n:"Australia",n2:"Australia"},SA:{c:[6,6],n:"Saudi Arabia",n2:"Saudi Arabia"},QA:{c:[5,5],n:"Qatar",n2:"Qatar"},AE:{c:[5,5],n:"United Arab Emirates",n2:"UAE"},IQ:{c:[5,5],n:"Iraq",n2:"Iraq"},OM:{c:[5,5],n:"Oman",n2:"Oman"},CN:{c:[4,4],n:"China PR",n2:"China PR"},UZ:{c:[4,4],n:"Uzbekistan",n2:"Uzbekistan"},SY:{c:[4,4],n:"Syria",n2:"Syria"},
+}
