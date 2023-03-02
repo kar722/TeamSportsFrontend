@@ -138,12 +138,12 @@
                     reaction(BOOHOO, jeer_url+row.id, boohoo_but.id);  
                   };
                   boohoo.appendChild(boohoo_but);  // add "boohoo button" to boohoo cell
-                 
+                
                 const ratio1 = document.createElement("td");
-                ratio1.innerText = Math.round(parseInt(haha_but.innerHTML) /(parseInt(haha_but.innerHTML) + parseInt(boohoo_but.innerHTML)) * 100) + "%"
+                ratio1.innerText = "+" + Math.round(1000* ((parseInt(boohoo_but.innerHTML))/(parseInt(haha_but.innerHTML))) + 1000);
   
                 const ratio2 = document.createElement("td");
-                ratio2.innerText = Math.round(parseInt(boohoo_but.innerHTML) /(parseInt(haha_but.innerHTML) + parseInt(boohoo_but.innerHTML)) * 100) + "%"
+                ratio2.innerText = "+" + Math.round(1000* ((parseInt(haha_but.innerHTML))/(parseInt(boohoo_but.innerHTML))) + 1000);
   
                 // this builds ALL td's (cells) into tr (row) element
                 tr.appendChild(joke);
